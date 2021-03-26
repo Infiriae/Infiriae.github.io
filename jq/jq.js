@@ -1,10 +1,10 @@
 $(document).ready(function() {
+    // var slide = 0;
+    // $('body').hide();
+    // var msg = window.prompt("What's your login?", "");
+    // $('body').show();
 
-    $('body').hide();
-    var msg = window.prompt("What's your login?", "");
-    $('body').show();
-
-    $('#you').html('<img src="' + msg + '">');
+    // $('#you').html('<img src="' + msg + '">');
 
     $('a').click(function() {
         alert('You are now leaving this page!');
@@ -26,7 +26,16 @@ $(document).ready(function() {
     });
 
     $('#show2').click(function() {
-        $('#pushitout').html('');
+        // $('#pushitout').slideToggle();
+        if (slide < 1) {
+            slide = 1;
+            $('#pushitout').fadeOut('');
+            console.log(slide);
+        } else {
+            slide = 0;
+            $('#pushitout').fadeIn('');
+            console.log(slide);
+        }
     });
 
 

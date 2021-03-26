@@ -1,0 +1,7 @@
+div {
+    border: 1px dashed red;
+}
+
+img {
+    object-fit: contain;
+}
