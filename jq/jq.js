@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    // var slide = 0;
+    var slide = 1;
+    $('#pushitout').fadeOut();
     // $('body').hide();
     // var msg = window.prompt("What's your login?", "");
     // $('body').show();
@@ -27,7 +28,7 @@ $(document).ready(function() {
 
     $('#show2').click(function() {
         // $('#pushitout').slideToggle();
-        if (slide < 1) {
+        if (slide === 0) {
             slide = 1;
             $('#pushitout').fadeOut('');
             console.log(slide);
