@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var slide = 1;
-    $('#pushitout').fadeOut();
+    $('#pushitout').hide();
+    $('#pushitout2').fadeOut('');
     // $('body').hide();
     // var msg = window.prompt("What's your login?", "");
     // $('body').show();
@@ -30,11 +31,13 @@ $(document).ready(function() {
         // $('#pushitout').slideToggle();
         if (slide === 0) {
             slide = 1;
-            $('#pushitout').fadeOut('');
+            $('#pushitout').hide('');
+            $('#pushitout2').fadeOut('');
             console.log(slide);
         } else {
             slide = 0;
-            $('#pushitout').fadeIn('');
+            $('#pushitout').show('');
+            $('#pushitout2').fadeIn('');
             console.log(slide);
         }
     });
