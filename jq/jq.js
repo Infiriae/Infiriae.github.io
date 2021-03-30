@@ -38,6 +38,9 @@ $(document).ready(function() {
         $.get("https://opentdb.com/api.php?amount=10&category="+pick, function(ress){
             console.log(ress);
             for(var i = 0; i < ress.results.length;i++){
+                $('#jsonyou').append(
+                    '<div class="row"><span id="img'+i+'"></span></div>'
+                    )
                 $('#jsonfind').append(
                     '<div class="row"><h3 id='+i+' class="font-weight-bold '+color+'">'
                     +
@@ -97,11 +100,13 @@ $(document).ready(function() {
             console.log('Correct!');
             $(this).removeClass('question');
             $(this).siblings().removeClass('question');
-            $(this).addClass('bg-success')
+            $(this).addClass('bg-success');
+            $('#img'+$(this).parent().attr('id')).html('<img style="height: 40vh;" src="img/yes.png" alt="Correct!">');
         } else {
             $(this).removeClass('question');
             $(this).siblings().removeClass('question');
-            $(this).addClass('bg-danger')
+            $(this).addClass('bg-danger');
+            $('#img'+$(this).parent().attr('id')).html('<img style="height: 40vh;" src="img/no.png" alt="Wrong!">');
             console.log('Wrong!');
         }
     });
