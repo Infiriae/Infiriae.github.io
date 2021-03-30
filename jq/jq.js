@@ -1,66 +1,152 @@
 $(document).ready(function() {
     var slide = 1;
     var theme = 0;
-    $('#pushitout').hide();
-    $('#pushitout2').fadeOut('');
-    // $('body').hide();
-    // var msg = window.prompt("What's your login?", "");
-    // $('body').show();
-
-    // $('#you').html('<img src="' + msg + '">');
-
-    $('a').click(function() {
-        alert('You are now leaving this page!');
+    $.get("https://opentdb.com/api_category.php", function(res){
+        for(var i = 0; i < res.trivia_categories.length;i++){
+            $('#cat').append(
+                '<option value="'
+                +
+                res.trivia_categories[i].id
+                +
+                '">'
+                +
+                res.trivia_categories[i].name
+                +
+                '</option>'
+                );
+        }
     });
+
+    $('#cat').change(function() {
+    });
+
+    $('#go').click(function(){
+        var cat = $('#cat').children('option:selected').text();
+        if(theme === 1){
+            var color = "text-light";
+        } else {
+            var color = "";
+        }
+        if(cat === 'Mixed') {
+            $('.quiztitle').html('<h3 class="'+color+'">Let\'s test your knowledge!</h3>');
+        } else {
+            $('.quiztitle').html("<h3>Let's see what you know about " + cat + "</h3>");
+        }
+
+        var pick = $('#cat').val();
+        $('#choosecat, label, #go').hide();
+        $.get("https://opentdb.com/api.php?amount=10&category="+pick, function(ress){
+            console.log(ress);
+            for(var i = 0; i < ress.results.length;i++){
+                $('#jsonfind').append(
+                    '<div class="row"><h3 id='+i+' class="font-weight-bold '+color+'">'
+                    +
+                    ress.results[i].question
+                    +
+                    '</h3></div>'
+                    );
+                var mod = [];
+                if(ress.results[i].type === 'multiple'){
+                    mod.push(ress.results[i].correct_answer);
+                    for(var o = 0; o < ress.results[i].incorrect_answers.length; o++){
+                        mod.push(ress.results[i].incorrect_answers[o]);
+                    }
+                    var answ = (mod.length);
+                    var nums = [];
+                    for(var x = 1; x <= answ; x++){
+                        nums.push(x);
+                    }
+                    var rando = [];
+                    var j = 0;
+                    while (answ-- > 0) {
+                        j = Math.floor(Math.random() * (answ+1));
+                        rando.push(nums[j]);
+                        nums.splice(j,1);
+                    }
+                    for(x=0;x<rando.length;x++){
+                        $('#'+i).append(
+                        '<p answer="'+ ress.results[i].correct_answer +'" id="'+i+x+'" class="question '+color+' text-center p-3">'
+                        +
+                        mod[rando[x]-1]
+                        +
+                        '</p>'
+                        );
+                    }
+                } else {
+                    $('#'+i).append(
+                    '<p answer="'+ ress.results[i].correct_answer +'"  id="'+i+0+'" class="question '+color+' text-center p-3">'
+                    +
+                    'True'
+                    +
+                    '</p>'
+                    +
+                    '<p answer="'+ ress.results[i].correct_answer +'"  id="'+i+1+'" class="question '+color+' text-center p-3">'
+                    +
+                    'False'
+                    +
+                    '</p>'
+                    );
+                }
+            }
+        });
+    });
+
+    $(document).on('click','.question', function(){
+        console.log($(this).text());
+        if($(this).text() === $(this).attr('answer')){
+            console.log('Correct!');
+            $(this).removeClass('question');
+            $(this).siblings().removeClass('question');
+            $(this).addClass('bg-success')
+        } else {
+            $(this).removeClass('question');
+            $(this).siblings().removeClass('question');
+            $(this).addClass('bg-danger')
+            console.log('Wrong!');
+        }
+    });
+
 
     $('#login').submit(function() {
         var i = ($("input").first().val());
-        $('#picture').html('<img src="' + i + '">');
-        console.log('failure');
+        $('#picture').html('<h1>'+ i +'</h1>');
     });
 
     $('#you').click(function() {
         $('#Uname').text('Name?');
-        console.log('failure');
     });
 
     $('#show1').click(function() {
-        $('p.thing').show();
+        location.reload();
     });
 
     $('#show2').click(function() {
         // $('#pushitout').slideToggle();
         if (slide === 0) {
             slide = 1;
+            console.log(mod);
             $('#pushitout').hide('');
             $('#pushitout2').fadeOut('');
-            console.log(slide);
         } else {
             slide = 0;
             $('#pushitout').show('');
             $('#pushitout2').fadeIn('');
-            console.log(slide);
         }
     });
 
-    $('#theme').click(function() {
-        // $('#pushitout').slideToggle();
+    $('#theme').click(function() { 
         if (theme === 0) {
             theme = 1;
             $('#theme').text('No change it back.');
-            $('p, h1').addClass('text-light');
+            $('p, h1, h3, label').addClass('text-light');
             $('body').removeClass('bg-info');
             $('body').addClass('bg-dark');
-            console.log(theme);
         } else {
             theme = 0;
             $('#theme').text('Nevermind. I like it dark.');
-            $('p, h1').removeClass('text-light');
+            $('p, h1, h3, label').removeClass('text-light');
             $('body').removeClass('bg-dark');
             $('body').addClass('bg-info');
-            console.log(theme);
         }
     });
-
-
 });

@@ -1,7 +1,11 @@
 div {
-    border: 1px dashed red;
+    border: 1px solid black;
 }
 
 img {
-    object-fit: contain;
+    object-fit: scale-down;
+}
+
+p.question {
+    background-color:darkcyan;
 }

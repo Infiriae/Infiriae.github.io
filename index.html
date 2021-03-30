@@ -14,51 +14,36 @@
 </head>
 
 <body class="bg-info container">
-    <h1>Hi there, it's me</h1>
+    <h1>Internet users! What do they know? Do they know things? Let's find out!</h1>
     <div class="mb-3">
-        <form id="login" action="javascript:;">
-            <div>
-                <input type="text">
-                <input type="submit">
+        <div id="choosecat" class="row d-inline">
+            <label for="cat" class="col-sm">Pick a category?
+                <select class="col-sm" name="cat" id="cat">
+                    <option value="0">Mixed</option>
+                </select>
+            </label>
+            <div class="row">
+                <div class="col">
+                    <button id="go">Start Quiz</button>
+                </div>
             </div>
-        </form>
+        </div>
+        <div class="quiztitle row">
+
+        </div>
     </div>
     <div class="container display-inline">
         <div class="row">
             <div id="jsonfind" class="col">
-                <div class="row">
-                    <p>This column</p>
-                </div>
-                <div class="row">
-                    <p>Will hold json.</p>
-                </div>
-            </div>
-            <div class="col">
-                <p id="picture"></p>
-            </div>
-            <div class="col">
-                <div class="row">
-                    <img class="h-10 w-100" id="pushitout" src="img/pin.jpg" alt="Health bar">
-                </div>
+
             </div>
             <div id="jsonyou" class="col pt-1 pb-1 mt-1 mb-1">
-                <div class="row">
-                    <p id="Uname">Your name</p>
-                </div>
-                <div class="row">
-                    <p id="Ulogin">Your login</p>
-                </div>
-                <div class="row">
-                    <p id="Umana">Your manager</p>
-                </div>
-                <div class="row">
-                    <p id="Usubs">Your subordinate</p>
-                </div>
+
             </div>
         </div>
         <div class="row">
             <div class="col justify-contents-right">
-                <button id="show2">Push me</button>
+                <button id="show1">Reset Page</button>
             </div>
             <div class="col">
                 <button id="theme">I don't like the color...</button>
@@ -68,8 +53,6 @@
             </div>
         </div>
     </div>
-
-    
 </body>
 
 </html>
