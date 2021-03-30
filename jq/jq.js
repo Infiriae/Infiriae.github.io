@@ -30,7 +30,7 @@ $(document).ready(function() {
         if(cat === 'Mixed') {
             $('.quiztitle').html('<h3 class="'+color+'">Let\'s test your knowledge!</h3>');
         } else {
-            $('.quiztitle').html("<h3>Let's see what you know about " + cat + "</h3>");
+            $('.quiztitle').html('<h3 class="'+color+'">Let\'s see what you know about ' + cat + '</h3>');
         }
 
         var pick = $('#cat').val();
