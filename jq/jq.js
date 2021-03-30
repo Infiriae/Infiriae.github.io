@@ -39,14 +39,14 @@ $(document).ready(function() {
             console.log(ress);
             for(var i = 0; i < ress.results.length;i++){
                 $('#jsonyou').append(
-                    '<div class="row"><span id="img'+i+'"></span></div>'
+                    '<div class="row bg-image"><span id="img'+i+'"></span></div>'
                     )
                 $('#jsonfind').append(
-                    '<div class="row"><h3 id='+i+' class="font-weight-bold '+color+'">'
+                    '<div  id='+i+' class="row"><h3 class="font-weight-bold p-3 '+color+'">'
                     +
                     ress.results[i].question
                     +
-                    '</h3></div>'
+                    '</h3>'
                     );
                 var mod = [];
                 if(ress.results[i].type === 'multiple'){
@@ -95,18 +95,25 @@ $(document).ready(function() {
     });
 
     $(document).on('click','.question', function(){
+        if(theme === 1){
+            var color = "text-light";
+        } else {
+            var color = "";
+        }
         console.log($(this).text());
         if($(this).text() === $(this).attr('answer')){
             console.log('Correct!');
             $(this).removeClass('question');
             $(this).siblings().removeClass('question');
             $(this).addClass('bg-success');
-            $('#img'+$(this).parent().attr('id')).html('<img style="height: 40vh;" src="img/yes.png" alt="Correct!">');
+            $('#img'+$(this).parent().attr('id')).html('<img style="height: 35vh;" src="img/yes.png" alt="Correct!">');
+            $('#img'+$(this).parent().attr('id')).append('<p class="'+color+'">Yes! The answer was '+$(this).attr('answer')+'!</p>');
         } else {
             $(this).removeClass('question');
             $(this).siblings().removeClass('question');
             $(this).addClass('bg-danger');
-            $('#img'+$(this).parent().attr('id')).html('<img style="height: 40vh;" src="img/no.png" alt="Wrong!">');
+            $('#img'+$(this).parent().attr('id')).html('<img style="height: 35vh;" src="img/no.png" alt="Wrong!">');
+            $('#img'+$(this).parent().attr('id')).append('<p class="'+color+'">Actually, the answer was '+$(this).attr('answer')+'!</p>');
             console.log('Wrong!');
         }
     });
